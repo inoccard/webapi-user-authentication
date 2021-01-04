@@ -12,7 +12,7 @@ namespace ShopAPI.Controllers
     {
         [HttpPost("login")]
         [AllowAnonymous]
-        public async Task<ActionResult<dynamic>> Authentication([FromBody] User user)
+        public async Task<ActionResult> Authentication([FromBody] User user)
         {
             var _user = UserRepository.GetUser(user.Username, user.Password);
 
@@ -24,7 +24,7 @@ namespace ShopAPI.Controllers
 
             /// Já retorna o usuário para o front,
             /// para não precisar fazer outro get novamente
-            return new { user = user, token = token };
+            return Ok(new { user = user, token = token });
         }
 
         [HttpGet("anonymous")]
